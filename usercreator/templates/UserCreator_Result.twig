@@ -1,0 +1,54 @@
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+{% set fullPageForm = true %}
+
+{% includeCssResource "usercreator/css/UserCreator_Style.css" %}
+{% includeJsResource "usercreator/js/clipboard.js" %}
+{% includeJsResource "usercreator/js/UserCreator_Script.js" %}
+
+{% set title = 'User Creator' | t %}
+
+{% block saveButton %}
+    <input type="submit" class="btn submit" value="{{ 'Create users'|t }}">
+{% endblock %}
+
+{% set content %}
+    <div class="user-creator">
+        <div class="user-creator__inner">
+            <h2>Created users</h2>
+            {% if createdUsers %}
+                <table id="feeds" class="data fullwidth collapsible">
+                    <thead>
+                    <th scope="col">{{ "Name" | t }}</th>
+                    <th scope="col">{{ "E-mail" | t }}</th>
+                    <th scope="col">{{ "Username" | t }}</th>
+                    {% if createResetUrls %}
+                        <th scope="col">{{ "Reset URL" | t }}</th>
+                    {% endif %}
+                    </thead>
+                    <tbody>
+                    {% for user in createdUsers %}
+                        <tr data-id="{{ user.id }}">
+                            <td><a href="{{ url('users/' ~ user.id) }}">{{ user.name }}</a>
+                            </td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.username }}</td>
+                            {% if createResetUrls %}
+                                <td><input type="button" class="btn small js-copyResetUrl" data-clipboard-text="{{ user.resetUrl }}" value="Copy URL"></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <script>
+                    window.userCreatorCopyData = {{ createdUsers | json_encode() | raw }};
+                </script>
+                <input type="button" class="btn submit user-creator__copy-list js-userCreatorCopyClipboard" value="{{ 'Copy list'|t }}">
+            {% endif %}
+
+
+        </div>
+    </div>
+{% endset %}
+

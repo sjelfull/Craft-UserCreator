@@ -1,0 +1,53 @@
+{#
+/**
+ * User Creator plugin for Craft CMS
+ *
+ * User Creator Settings.twig
+ *
+ * @author    Fred Carlsen
+ * @copyright Copyright (c) 2016 Fred Carlsen
+ * @link      http://sjelfull.no
+ * @package   UserCreator
+ * @since     0.0.1
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% includeCssResource "usercreator/css/UserCreator_Style.css" %}
+{% includeJsResource "usercreator/js/UserCreator_Script.js" %}
+
+{{ forms.checkboxGroup({
+    label: 'Default user groups',
+    instructions: 'Assign users to one or more default group',
+    id: 'defaultUserGroups',
+    name: 'defaultUserGroups',
+    options: [
+        {
+            label: 'Test group',
+            value: 1
+        }
+    ],
+    }) }}
+
+{{ forms.lightswitchField({
+    label: 'Activate users',
+    id: 'activateUsers',
+    name: 'activateUsers',
+    on: settings['activateUsers']})
+}}
+
+{{ forms.lightswitchField({
+    label: 'Force password reset',
+    instructions: 'Forces password reset when user logs in for the first time.',
+    id: 'forcePasswordReset',
+    name: 'forcePasswordReset',
+    on: settings['forcePasswordReset']})
+}}
+
+{{ forms.lightswitchField({
+    label: 'Create reset links',
+    id: 'createResetLinks',
+    name: 'createResetLinks',
+    on: settings['createResetLinks']})
+}}

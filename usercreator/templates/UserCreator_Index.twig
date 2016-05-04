@@ -1,0 +1,76 @@
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+{% set fullPageForm = true %}
+
+{% includeCssResource "usercreator/css/UserCreator_Style.css" %}
+
+{% set title = 'User Creator' | t %}
+
+{% block saveButton %}
+    <input type="submit" class="btn submit" value="{{ 'Create users'|t }}">
+{% endblock %}
+
+{% set content %}
+    <div class="user-creator">
+        <div class="user-creator__inner">
+            <input type="hidden" name="action" value="userCreator/create">
+            <input type="hidden" name="redirect" value="usercreator/result">
+
+            <div class="field">
+                <div class="heading">
+                    <label>{{ 'User groups' | t }}</label>
+                </div>
+                <div class="input ltr">
+                    {% for group in groups %}
+                        {{ forms.checkboxField({
+                            label: group.name,
+                            id: 'userGroups' ~ group.id,
+                            name: 'userGroups[]',
+                            value: group.id
+                        }) }}
+                    {% endfor %}
+                </div>
+            </div>
+
+            {{ forms.lightswitchField({
+                    label: 'Activate users',
+                    id: 'activateUsers',
+                    name: 'activateUsers',
+                    on: true,
+                })
+            }}
+
+            {{ forms.lightswitchField({
+                    label: 'Force password reset',
+                    instructions: 'Forces password reset when user logs in for the first time.',
+                    id: 'forcePasswordReset',
+                    name: 'forcePasswordReset',
+                    on: true,
+                })
+            }}
+
+            {{ forms.lightswitchField({
+                    label: 'Create reset URLs',
+                    id: 'createResetUrls',
+                    name: 'createResetUrls',
+                    on: true,
+                })
+            }}
+
+            {{ forms.editableTableField({
+                label: 'Users to create',
+                id:     'users',
+                name:   'users',
+                cols: {
+                    firstName: { heading : 'First name', type: 'singleline' },
+                    lastName: { heading : 'Last name', type: 'singleline' },
+                    email: { heading : 'E-mail address', type: 'singleline' },
+                    username: { heading : 'Username', type: 'singleline' },
+                },
+                rows: []
+            }) }}
+
+        </div>
+    </div>
+{% endset %}
+
