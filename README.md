@@ -15,7 +15,10 @@ To install User Creator, follow these steps:
 
 User Creator works on Craft 2.4.x and Craft 2.5.x.
 
+## Roadmap
+
 * Create users from uploaded CSV/JSON
+* Add plugin permissions
 
 ## User Creator Changelog
 
