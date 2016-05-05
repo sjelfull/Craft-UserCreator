@@ -11,6 +11,12 @@
  */
 
 $(function () {
+    // If this Craft version supports elevated sessions
+    if (Craft.hasOwnProperty('ElevatedSessionForm')) {
+        // Require an elevated session when submitting a form new
+        Craft.ElevatedSessionForm('#container');
+    }
+
     var userData = window.userCreatorCopyData;
     var text = '';
 

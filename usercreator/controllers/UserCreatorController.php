@@ -46,6 +46,10 @@ class UserCreatorController extends BaseController
     {
         $this->requireAdmin();
 
+        if (craft()->getVersion() . craft()->getBuild() >= '2.6.2784') {
+            $this->requireElevatedSession();
+        }
+
         $users              = craft()->request->getRequiredPost('users');
         $activateUsers      = craft()->request->getRequiredPost('activateUsers');
         $forcePasswordReset = craft()->request->getRequiredPost('forcePasswordReset');

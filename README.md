@@ -22,7 +22,12 @@ User Creator works on Craft 2.4.x and Craft 2.5.x.
 
 ## User Creator Changelog
 
-### 0.0.1 -- 2016.05.03
+### 1.0.1 -- 2016.05.05
+
+* [Added] Added support for elevated user sessions
+* [Improved] Changed initial version number
+
+### 1.0.0 -- 2016.05.03
 
 * Initial release
 
