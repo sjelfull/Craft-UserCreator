@@ -1,16 +1,17 @@
 [
     {
         "version": "1.0.1",
-        "downloadUrl": "https://github.com/sjelfull/usercreator/archive/master.zip",
+        "downloadUrl": "https://github.com/sjelfull/Craft-UserCreator/archive/master.zip",
         "date": "2016-05-05T14:35:43.991Z",
         "notes": [
             "[Added] Added support for elevated user sessions",
-            "[Improved] Changed initial version number"
+            "[Improved] Changed initial version number",
+            "[Fixed] Fixed wrong download url in release feed"
         ]
     },
     {
         "version": "1.0.0",
-        "downloadUrl": "https://github.com/sjelfull/usercreator/archive/master.zip",
+        "downloadUrl": "https://github.com/sjelfull/Craft-UserCreator/archive/master.zip",
         "date": "2016-05-03T19:58:43.991Z",
         "notes": [
             "[Added] Initial release"
