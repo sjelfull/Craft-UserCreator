@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2016 Fred Carlsen
  * @link      http://sjelfull.no
  * @package   UserCreator
- * @since     0.0.1
+ * @since     1.0.0
  */
 
 namespace Craft;
@@ -59,7 +59,7 @@ class UserCreatorPlugin extends BasePlugin
      */
     public function getVersion ()
     {
-        return '0.0.1';
+        return '1.0.1';
     }
 
     /**
@@ -67,7 +67,7 @@ class UserCreatorPlugin extends BasePlugin
      */
     public function getSchemaVersion ()
     {
-        return '0.0.1';
+        return '1.0.0';
     }
 
     /**

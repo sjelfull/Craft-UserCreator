@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2016 Fred Carlsen
  * @link      http://sjelfull.no
  * @package   UserCreator
- * @since     0.0.1
+ * @since     1.0.0
  */
 
 namespace Craft;
