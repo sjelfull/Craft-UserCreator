@@ -46,7 +46,8 @@ class UserCreatorController extends BaseController
     {
         $this->requireAdmin();
 
-        if (craft()->getVersion() . craft()->getBuild() >= '2.6.2784') {
+        // Require elevated session
+        if ((int) craft()->getVersion() >= 2 && (int) craft()->getBuild() >= 2784) {
             $this->requireElevatedSession();
         }
 

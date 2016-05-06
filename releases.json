@@ -1,5 +1,13 @@
 [
     {
+        "version": "1.0.2",
+        "downloadUrl": "https://github.com/sjelfull/Craft-UserCreator/archive/master.zip",
+        "date": "2016-05-06T12:41:43.991Z",
+        "notes": [
+            "[Fixed] Fixed version/build check when enabling elevated session"
+        ]
+    },
+    {
         "version": "1.0.1",
         "downloadUrl": "https://github.com/sjelfull/Craft-UserCreator/archive/master.zip",
         "date": "2016-05-05T14:35:43.991Z",
