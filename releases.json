@@ -1,5 +1,14 @@
 [
     {
+        "version": "1.0.3",
+        "downloadUrl": "https://github.com/sjelfull/Craft-UserCreator/archive/master.zip",
+        "date": "2016-09-28T09:50:43.991Z",
+        "notes": [
+            "[Fixed] Fixed an issue where elevated session wasn't triggered when submitting the form",
+            "[Improved] Added new icon",
+        ]
+    },
+    {
         "version": "1.0.2",
         "downloadUrl": "https://github.com/sjelfull/Craft-UserCreator/archive/master.zip",
         "date": "2016-05-06T12:41:43.991Z",
