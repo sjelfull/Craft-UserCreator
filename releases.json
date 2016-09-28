@@ -1,7 +1,7 @@
 [
     {
         "version": "1.0.3",
-        "downloadUrl": "https://github.com/sjelfull/Craft-UserCreator/archive/master.zip",
+        "downloadUrl": "https://github.com/sjelfull/Craft-UserCreator/archive/1.0.3.zip",
         "date": "2016-09-28T09:50:43.991Z",
         "notes": [
             "[Fixed] Fixed an issue where elevated session wasn't triggered when submitting the form",
@@ -10,7 +10,7 @@
     },
     {
         "version": "1.0.2",
-        "downloadUrl": "https://github.com/sjelfull/Craft-UserCreator/archive/master.zip",
+        "downloadUrl": "https://github.com/sjelfull/Craft-UserCreator/archive/1.0.2.zip",
         "date": "2016-05-06T12:41:43.991Z",
         "notes": [
             "[Fixed] Fixed version/build check when enabling elevated session"
@@ -18,7 +18,7 @@
     },
     {
         "version": "1.0.1",
-        "downloadUrl": "https://github.com/sjelfull/Craft-UserCreator/archive/master.zip",
+        "downloadUrl": "https://github.com/sjelfull/Craft-UserCreator/archive/1.0.1.zip",
         "date": "2016-05-05T14:35:43.991Z",
         "notes": [
             "[Added] Added support for elevated user sessions",
@@ -28,7 +28,7 @@
     },
     {
         "version": "1.0.0",
-        "downloadUrl": "https://github.com/sjelfull/Craft-UserCreator/archive/master.zip",
+        "downloadUrl": "https://github.com/sjelfull/Craft-UserCreator/archive/1.0.0.zip",
         "date": "2016-05-03T19:58:43.991Z",
         "notes": [
             "[Added] Initial release"
