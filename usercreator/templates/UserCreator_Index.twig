@@ -3,6 +3,7 @@
 {% set fullPageForm = true %}
 
 {% includeCssResource "usercreator/css/UserCreator_Style.css" %}
+{% includeJsResource "usercreator/js/UserCreator_Script.js" %}
 
 {% set title = 'User Creator' | t %}
 
@@ -11,7 +12,7 @@
 {% endblock %}
 
 {% set content %}
-    <div class="user-creator">
+    <div class="user-creator" id="js-userCreatorForm">
         <div class="user-creator__inner">
             <input type="hidden" name="action" value="userCreator/create">
             <input type="hidden" name="redirect" value="usercreator/result">
@@ -73,4 +74,3 @@
         </div>
     </div>
 {% endset %}
-
