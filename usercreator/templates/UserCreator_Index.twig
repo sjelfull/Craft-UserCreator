@@ -58,18 +58,32 @@
                 })
             }}
 
-            {{ forms.editableTableField({
-                label: 'Users to create',
-                id:     'users',
-                name:   'users',
-                cols: {
-                    firstName: { heading : 'First name', type: 'singleline' },
-                    lastName: { heading : 'Last name', type: 'singleline' },
-                    email: { heading : 'E-mail address', type: 'singleline' },
-                    username: { heading : 'Username', type: 'singleline' },
-                },
-                rows: []
-            }) }}
+            {% if craft.config.get('useEmailAsUsername') %}
+                {{ forms.editableTableField({
+                    label: 'Users to create',
+                    id:     'users',
+                    name:   'users',
+                    cols: {
+                        firstName: { heading : 'First name', type: 'singleline' },
+                        lastName: { heading : 'Last name', type: 'singleline' },
+                        email: { heading : 'E-mail address', type: 'singleline' },
+                    },
+                    rows: []
+                }) }}
+            {% else %}
+                {{ forms.editableTableField({
+                    label: 'Users to create',
+                    id:     'users',
+                    name:   'users',
+                    cols: {
+                        firstName: { heading : 'First name', type: 'singleline' },
+                        lastName: { heading : 'Last name', type: 'singleline' },
+                        email: { heading : 'E-mail address', type: 'singleline' },
+                        username: { heading : 'Username', type: 'singleline' },
+                    },
+                    rows: []
+                }) }}
+            {% endif %}
 
         </div>
     </div>
