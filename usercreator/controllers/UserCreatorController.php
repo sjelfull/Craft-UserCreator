@@ -71,6 +71,7 @@ class UserCreatorController extends BaseController
         $createResetUrls    = craft()->request->getRequiredPost('createResetUrls');
         $createdUsers       = [ ];
         $resetUrl           = null;
+        $useEmailAsUsername = craft()->config->get('useEmailAsUsername');
 
         $message = Craft::t('Created users. That was easy!');
 
@@ -93,6 +94,10 @@ class UserCreatorController extends BaseController
 
             foreach ($user as $key => $value) {
                 $userModel->setAttribute($key, $value);
+            }
+
+            if ( $useEmailAsUsername ) {
+                $userModel->setAttribute('username', $user['email']);
             }
 
             $randomPassword         = StringHelper::randomString(25);
