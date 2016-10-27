@@ -89,7 +89,7 @@ class UserCreatorController extends BaseController
         foreach ($users as $user) {
             $userModel = new UserModel();
 
-            $user = array_merge($user, $extraAttributes);
+            $user = array_merge($this->getSafeAttributes($user), $extraAttributes);
 
             foreach ($user as $key => $value) {
                 $userModel->setAttribute($key, $value);
@@ -152,5 +152,15 @@ class UserCreatorController extends BaseController
 
         $this->redirect('usercreator/result');
         //$this->returnJson($createdUsers);
+    }
+
+    public function getSafeAttributes ($user)
+    {
+        $safeAttributes = [ 'firstName', 'lastName', 'username', 'email' ];
+        $filtered       = array_filter($user, function ($value, $key) use ($safeAttributes) {
+            return in_array($key, $safeAttributes);
+        }, ARRAY_FILTER_USE_BOTH);
+
+        return $filtered;
     }
 }
