@@ -48,9 +48,14 @@ class UserCreatorController extends BaseController
     public function actionResult ()
     {
         $this->requireAdmin();
+        $result = craft()->userSession->getFlash('userCreatorResult');
+
+        if ( !$result ) {
+            return $this->redirect('usercreator');
+        }
 
         $this->renderTemplate('usercreator/UserCreator_Result', [
-            'createdUsers'    => craft()->userSession->getFlash('userCreatorResult'),
+            'createdUsers'    => $result,
             'createResetUrls' => craft()->userSession->getFlash('createResetUrls'),
         ]);
     }
@@ -139,7 +144,7 @@ class UserCreatorController extends BaseController
                 foreach ($errors as $attribute => $errors) {
                     craft()->userSession->setError($errors[0]);
                 }
-                
+
                 craft()->userSession->setFlash('users', $users);
                 craft()->userSession->setFlash('activateUsers', $activateUsers);
                 craft()->userSession->setFlash('forcePasswordReset', $forcePasswordReset);
