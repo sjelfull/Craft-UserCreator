@@ -94,18 +94,6 @@ class UserCreatorPlugin extends BasePlugin
         return true;
     }
 
-    /**
-     * @param mixed $settings The Widget's settings
-     *
-     * @return mixed
-     */
-    public function prepSettings ($settings)
-    {
-        // Modify $settings here...
-
-        return $settings;
-    }
-
     public function registerCpRoutes ()
     {
         return array(
