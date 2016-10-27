@@ -28,8 +28,21 @@ class UserCreatorController extends BaseController
     {
         $this->requireAdmin();
 
-        $groups = craft()->userGroups->getAllGroups();
-        $this->renderTemplate('usercreator/UserCreator_Index', [ 'groups' => $groups ]);
+        $hasError           = craft()->userSession->hasFlash('error');
+        $users              = craft()->userSession->getFlash('users');
+        $groupIds           = craft()->userSession->getFlash('groupIds');
+        $createResetUrls    = $hasError ? craft()->userSession->getFlash('createResetUrls') : true;
+        $activateUsers      = $hasError ? craft()->userSession->getFlash('activateUsers') : true;
+        $forcePasswordReset = $hasError ? craft()->userSession->getFlash('forcePasswordReset') : true;
+
+        $this->renderTemplate('usercreator/UserCreator_Index', [
+            'groups'             => craft()->userGroups->getAllGroups(),
+            'users'              => $users,
+            'createResetUrls'    => $createResetUrls,
+            'activateUsers'      => $activateUsers,
+            'forcePasswordReset' => $forcePasswordReset,
+            'groupIds'           => $groupIds,
+        ]);
     }
 
     public function actionResult ()
@@ -45,9 +58,10 @@ class UserCreatorController extends BaseController
     public function actionCreate ()
     {
         $this->requireAdmin();
+        $this->requirePostRequest();
 
         // Require elevated session
-        if ((int) craft()->getVersion() >= 2 && (int) craft()->getBuild() >= 2784) {
+        if ( (int)craft()->getVersion() >= 2 && (int)craft()->getBuild() >= 2784 ) {
             $this->requireElevatedSession();
         }
 
@@ -61,12 +75,12 @@ class UserCreatorController extends BaseController
         $message = Craft::t('Created users. That was easy!');
 
         $extraAttributes = [
-            'admin'                 => false,
             //'client'    => false,
+            'admin'                 => false,
+            'archived'              => false,
             'locked'                => false,
             'suspended'             => false,
             'pending'               => !$activateUsers,
-            'archived'              => false,
             'passwordResetRequired' => $forcePasswordReset,
         ];
 
@@ -84,16 +98,52 @@ class UserCreatorController extends BaseController
             $randomPassword         = StringHelper::randomString(25);
             $userModel->newPassword = $randomPassword;
 
-            craft()->users->saveUser($userModel);
+            if ( !$userModel->validate() ) {
+                $errors = $userModel->getErrors();
+                foreach ($errors as $attribute => $errors) {
+                    craft()->userSession->setError($errors[0]);
+                }
 
-            if ( $createResetUrls ) {
-                $resetUrl = craft()->users->getPasswordResetUrl($userModel);
+                craft()->userSession->setFlash('users', $users);
+                craft()->userSession->setFlash('activateUsers', $activateUsers);
+                craft()->userSession->setFlash('forcePasswordReset', $forcePasswordReset);
+                craft()->userSession->setFlash('createResetUrls', $createResetUrls);
+                craft()->userSession->setFlash('groupIds', $groupIds);
+
+                return $this->redirect('usercreator');
             }
 
-            $createdUsers[] = array_merge($userModel->getAttributes(null, $flatten = true), [ 'name' => $userModel->getName(), 'password' => $randomPassword, 'resetUrl' => $resetUrl ]);
+            if ( craft()->users->saveUser($userModel) ) {
 
-            // Assign users
-            craft()->userGroups->assignUserToGroups($userModel->id, $groupIds);
+                if ( $createResetUrls ) {
+                    $resetUrl = craft()->users->getPasswordResetUrl($userModel);
+                }
+
+                $createdUsers[] = array_merge($userModel->getAttributes(null, $flatten = true), [
+                    'name'     => $userModel->getName(),
+                    'password' => $randomPassword,
+                    'resetUrl' => $resetUrl
+                ]);
+
+                // Assign users
+                craft()->userGroups->assignUserToGroups($userModel->id, $groupIds);
+
+            }
+            else {
+                $errors = $userModel->getErrors();
+                foreach ($errors as $attribute => $errors) {
+                    craft()->userSession->setError($errors[0]);
+                }
+                
+                craft()->userSession->setFlash('users', $users);
+                craft()->userSession->setFlash('activateUsers', $activateUsers);
+                craft()->userSession->setFlash('forcePasswordReset', $forcePasswordReset);
+                craft()->userSession->setFlash('createResetUrls', $createResetUrls);
+                craft()->userSession->setFlash('groupIds', $groupIds);
+
+                return $this->redirect('usercreator');
+            }
+
         }
 
         craft()->userSession->setFlash('notice', $message);

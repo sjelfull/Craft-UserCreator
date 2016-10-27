@@ -27,7 +27,8 @@
                             label: group.name,
                             id: 'userGroups' ~ group.id,
                             name: 'userGroups[]',
-                            value: group.id
+                            value: group.id,
+                            checked: groupIds is defined and group.id in groupIds
                         }) }}
                     {% endfor %}
                 </div>
@@ -37,7 +38,7 @@
                     label: 'Activate users',
                     id: 'activateUsers',
                     name: 'activateUsers',
-                    on: true,
+                    on: activateUsers,
                 })
             }}
 
@@ -46,7 +47,7 @@
                     instructions: 'Forces password reset when user logs in for the first time.',
                     id: 'forcePasswordReset',
                     name: 'forcePasswordReset',
-                    on: true,
+                    on: forcePasswordReset,
                 })
             }}
 
@@ -54,7 +55,7 @@
                     label: 'Create reset URLs',
                     id: 'createResetUrls',
                     name: 'createResetUrls',
-                    on: true,
+                    on: createResetUrls,
                 })
             }}
 
@@ -63,25 +64,25 @@
                     label: 'Users to create',
                     id:     'users',
                     name:   'users',
+                    rows: users|default([]),
                     cols: {
                         firstName: { heading : 'First name', type: 'singleline' },
                         lastName: { heading : 'Last name', type: 'singleline' },
                         email: { heading : 'E-mail address', type: 'singleline' },
                     },
-                    rows: []
                 }) }}
             {% else %}
                 {{ forms.editableTableField({
                     label: 'Users to create',
                     id:     'users',
                     name:   'users',
+                    rows: users|default([]),
                     cols: {
                         firstName: { heading : 'First name', type: 'singleline' },
                         lastName: { heading : 'Last name', type: 'singleline' },
                         email: { heading : 'E-mail address', type: 'singleline' },
                         username: { heading : 'Username', type: 'singleline' },
                     },
-                    rows: []
                 }) }}
             {% endif %}
 
