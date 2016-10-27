@@ -22,6 +22,13 @@ User Creator works on Craft 2.4.x and Craft 2.5.x.
 
 ## User Creator Changelog
 
+### 1.0.4 -- 2016.10.27
+
+* [Fixed] Fixed an issue where useEmailAsUsername as enabled and username wasn’t set
+* [Improved] Added redirect from result screen if no users was created
+* [Improved] Added error handling
+* [Improved] Added new icon
+
 ### 1.0.3 -- 2016.09.28
 
 * [Fixed] Fixed an issue where elevated session wasn't triggered when submitting the form
